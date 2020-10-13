@@ -9,6 +9,11 @@ const numbersCharacters = "0123456789";
 
 const specialCharacters = "!@#$%^&*()-=_+[]{}|;':,./<>?`~";
 
+// sourced from: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random"
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
 function getPasswordLength() {
   var passLengthRaw = prompt(
     "How long should your password length be?",
@@ -85,8 +90,13 @@ function generatePassword() {
   }
 
   // Generate password
+  var generatedPassword = "";
 
-  return desiredCharacters;
+  for (let i = 0; i < passLength; i++) {
+    generatedPassword +=
+      desiredCharacters[getRandomInt(desiredCharacters.length)];
+  }
+  return generatedPassword;
 }
 
 // Write password to the #password input
