@@ -1,6 +1,14 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+const lowercaseCharacters = "abcdefghijklmnopqrstuvwxyz";
+
+const uppercaseCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+const numbersCharacters = "0123456789";
+
+const specialCharacters = "!@#$%^&*()-=_+[]{}|;':,./<>?`~";
+
 function getPasswordLength() {
   var passLengthRaw = prompt(
     "How long should your password length be?",
@@ -14,6 +22,44 @@ function getPasswordLength() {
   }
 }
 
+function shouldUseCharacterClass(characterClass) {
+  while (true) {
+    var res = prompt(
+      "Do you want your password to include " + characterClass + "? (yes/no)"
+    );
+    if ("yes" === res) {
+      return true;
+    } else if ("no" === res) {
+      return false;
+    } else {
+      alert("Please answer 'yes' or 'no' ");
+    }
+  }
+}
+function getCharacterClasses() {
+  while (true) {
+    var shouldUseLowerCase = shouldUseCharacterClass("lowercase characters");
+    var shouldUseUpperCase = shouldUseCharacterClass("uppercase characters");
+    var shouldUseNumeric = shouldUseCharacterClass("numeric characters");
+    var shouldUseSpecial = shouldUseCharacterClass("special characters");
+    if (
+      shouldUseLowerCase ||
+      shouldUseUpperCase ||
+      shouldUseNumeric ||
+      shouldUseSpecial
+    ) {
+      return {
+        shouldUseLowerCase,
+        shouldUseUpperCase,
+        shouldUseNumeric,
+        shouldUseSpecial,
+      };
+    } else {
+      alert("Please choose at least ONE character class");
+    }
+  }
+}
+
 function generatePassword() {
   // Prompt for length of password of 8-128
   var passLength = false;
@@ -23,9 +69,24 @@ function generatePassword() {
 
   // Choose lowercase, uppercase, numeric, and/or special characters .. at least one must be selected
 
+  const usedCharacterClasses = getCharacterClasses();
+  var desiredCharacters = "";
+  if (usedCharacterClasses.shouldUseLowerCase) {
+    desiredCharacters += lowercaseCharacters;
+  }
+  if (usedCharacterClasses.shouldUseUpperCase) {
+    desiredCharacters += uppercaseCharacters;
+  }
+  if (usedCharacterClasses.shouldUseNumeric) {
+    desiredCharacters += numbersCharacters;
+  }
+  if (usedCharacterClasses.shouldUseSpecial) {
+    desiredCharacters += specialCharacters;
+  }
+
   // Generate password
 
-  return passLength;
+  return desiredCharacters;
 }
 
 // Write password to the #password input
