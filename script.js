@@ -26,6 +26,7 @@ function getPasswordLength() {
     return false;
   }
 }
+// Prompts user what criteria they want for their password
 
 function shouldUseCharacterClass(characterClass) {
   while (true) {
