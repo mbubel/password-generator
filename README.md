@@ -2,3 +2,4 @@ Created a random password generator for the user. When prompted, the user choose
 
 https://mbubel.github.io/password-generator/.
 
+![](images/Password-Generator%20SS.png)
